@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/13 16:04:05 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/18 18:12:27 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLX_DYLB = $(MLX_PATH)/libmlx.dylib
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIB_PRINTF_DIR = ft_printf
-LIB_PRINTF = $(PRINTF_DIR)/libftprintf.a
+LIB_PRINTF = $(LIB_PRINTF_DIR)/libftprintf.a
 
 # Include Header
 INC_DIR = include
@@ -42,6 +42,7 @@ DEPS = $(addprefix $(DEP_DIR)/, $(SRCS:.c=.d))
 # Compile
 CC = clang
 CF = -Wall -Wextra -Werror
+#CF = -Wall -Wextra -Werror -fsanitize=address
 INC_CF = -I$(INC_DIR)
 DEP_CF = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 MLX_CF = -lmlx
