@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/18 18:53:46 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/18 19:25:40 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,10 +238,6 @@ int main(int ac, char *av[])
         return 1;
     }
 
-	// Clear window
-	//mlx_clear_window(mlx_ptr, win_ptr);
-	//exit(1);
-
 	// Create a new image
 	data.img = mlx_new_image(fdf.mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
 
@@ -261,6 +257,9 @@ int main(int ac, char *av[])
     // Draw the wireframe model
     //draw_wireframe_model(mlx_ptr, win_ptr, points, rows, cols);
     draw_wireframe_model(&data, points, rows, cols);
+
+	// Clear Window
+	mlx_clear_window(fdf.mlx_ptr, fdf.win_ptr);
 
 	// Put pixel
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, data.img, 100, 100);
