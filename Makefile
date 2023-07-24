@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/18 18:12:27 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/19 15:09:18 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,11 @@ INC_DIR = include
 
 # Sources
 SRC_DIR = src
-SRCS = fdf.c
+SRCS = \
+	   fdf.c \
+	   draw.c \
+	   read_map.c \
+	   error.c
 
 # vpath for serching source files in multiple directories
 vpath %.c $(SRC_DIR)
