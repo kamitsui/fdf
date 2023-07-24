@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 16:21:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:30:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ int main(int ac, char *av[])
 		return 1;
 	}
 	data.img = mlx_new_image(fdf.mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
-	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.size_line,
-								&data.endian);
-	//draw_wireframe_model(&data, fdf.points, fdf.map.rows, fdf.map.cols);
+	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel,
+								&data.size_line, &data.endian);
 	draw_wireframe_model(&data, fdf.points, fdf.map->rows, fdf.map->cols);
 	mlx_clear_window(fdf.mlx_ptr, fdf.win_ptr);
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, data.img, 100, 100);
