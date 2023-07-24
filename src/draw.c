@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:07:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 16:21:07 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/24 22:50:48 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 
 void draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols)
 {
+	ft_printf("rows:%d cols:%d\n", rows, cols);
 	for (int i = 0; i < rows; i++) {
 		for (int j = 0; j < cols; j++) {
 			Point3D current_point = points[i][j];

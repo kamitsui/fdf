@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 20:51:49 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/24 21:31:48 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/24 23:13:57 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS = \
 	   ft_count_words.c \
 	   ft_isdigit.c \
 	   ft_isxdigit.c \
+	   ft_isprint.c \
 	   ft_itoa.c \
 	   ft_itoa_binary.c \
 	   ft_memcpy.c \
