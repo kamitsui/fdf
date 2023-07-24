@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:07:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/18 21:12:22 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:21:07 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 		}
 	}
 }
+
+#include "ft_printf.h"
 
 void draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols)
 {

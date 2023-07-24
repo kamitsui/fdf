@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 14:52:21 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:21:04 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	my_key_function(int keycode, t_fdf *fdf)
 	void *win_ptr = fdf->win_ptr;
 	void *img = fdf->data->img;
 	Point3D **points = fdf->points;
-	int rows = fdf->map.rows;
+	int rows = fdf->map->rows;
 
 	if (keycode == KEY_ESC)
 	{
@@ -42,7 +42,9 @@ int main(int ac, char *av[])
 {
 	t_fdf	fdf;
 	t_data	data;
+	Map		map;
 	fdf.data = &data;
+	fdf.map = &map;
 
 	if (ac != 2)
 	{
@@ -51,7 +53,6 @@ int main(int ac, char *av[])
 	}
 
 	read_map(av[1], &fdf);// segmentation fault
-	ft_printf("abc\n");// debug
 	fdf.mlx_ptr = mlx_init();
 	if (fdf.mlx_ptr == NULL) {
 		fprintf(stderr, "Error: Failed to initialize MiniLibX\n");
@@ -65,7 +66,8 @@ int main(int ac, char *av[])
 	data.img = mlx_new_image(fdf.mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
 	data.addr = mlx_get_data_addr(data.img, &data.bits_per_pixel, &data.size_line,
 								&data.endian);
-	draw_wireframe_model(&data, fdf.points, fdf.map.rows, fdf.map.cols);
+	//draw_wireframe_model(&data, fdf.points, fdf.map.rows, fdf.map.cols);
+	draw_wireframe_model(&data, fdf.points, fdf.map->rows, fdf.map->cols);
 	mlx_clear_window(fdf.mlx_ptr, fdf.win_ptr);
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, data.img, 100, 100);
 	mlx_key_hook(fdf.win_ptr, &my_key_function, &fdf);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/19 15:10:01 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:55:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ typedef struct	s_data {
 }				t_data;
 
 typedef struct	s_fdf {
-    void *mlx_ptr;      // MiniLibX graphics system pointer
-    void *win_ptr;      // Window pointer
+    void	*mlx_ptr;      // MiniLibX graphics system pointer
+    void	*win_ptr;      // Window pointer
 	t_data	*data;		// Image pointer
-    Point3D **points;   // 2D array to store the points
-	Map map;
+    Point3D	**points;   // 2D array to store the points
+	Map		*map; // Map size
 } t_fdf;
 
 void draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols);

@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/19 14:56:04 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:20:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,27 @@ void	read_map(char *file, t_fdf *fdf)
 //void	read_map(FILE *file, t_fdf *fdf)
 {
 	Point3D **points;
-	points = fdf->points;
+	//points = fdf->points;
 	int rows, cols;     // Number of rows and columns in the map
 	//int fd = open(file, O_RDONLY);
-	FILE *file_ptr = fopen(file, O_RDONLY);
+	FILE *file_ptr = fopen(file, "r");
 	//if (fd == -1) {
 	if (file_ptr == NULL) {
 		ft_perror_exit("open");
 		//fprintf(stderr, "Error: Failed to open the file\n");
 		//return 1;
 	}
-	fscanf(file_ptr, "%d %d\n", &rows, &cols);
-	fdf->map.rows = 11;
-	fdf->map.cols = 19;
-	rows = fdf->map.rows;
-	cols = fdf->map.cols;
+	//fscanf(file_ptr, "%d %d\n", &rows, &cols);
+	//printf("%d %d\n", rows, cols);
+	//exit(0);
+	fdf->map->rows = 11;
+	fdf->map->cols = 19;
+	rows = fdf->map->rows;
+	cols = fdf->map->cols;
 
 	// Allocate memory for the points array
 	points = (Point3D **)malloc(rows * sizeof(Point3D *));
+	fdf->points = points;
 	if (points == NULL) {
 		//close(fd);
 		fclose(file_ptr);
