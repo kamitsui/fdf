@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 20:51:49 by kamitsui          #+#    #+#              #
-#    Updated: 2023/06/20 21:07:35 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/24 21:31:48 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ DEP_DIR = .dep
 # Source files
 SRCS = \
 	   ft_bzero.c \
+	   ft_count_words.c \
 	   ft_isdigit.c \
 	   ft_isxdigit.c \
 	   ft_itoa.c \
