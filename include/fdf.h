@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 15:11:17 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:56:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,18 @@
 //{
 //	ERR_ARG,
 //	ERR_MLX,
-//	ERR_WINDOW
+//	ERR_WIN,
 //};
 
 // Error message
-# define MSG_ARG	"Error: Insufficient arguments. Bye!! :)\n"
 # define MSG_MLX	"Error: Failed to initialize MiniLibX\n"
-# define MSG_WINDOW	"Error: Failed to create a window\n"
+# define MSG_WIN	"Error: Failed to create a window\n"
+# define MSG_MAP	"Error: Unmatched number of columns elements in Map file\n"
+
+// Error number
+# define ERR_MLX	0
+# define ERR_WIN	1
+# define ERR_MAP	2
 # define ERR_NUM	3
 
 /*
@@ -46,6 +51,14 @@
 //# define WINDOW_HEIGHT	108000
 
 // FDF data structure
+
+typedef struct	s_wire {
+	int	x0;
+	int	y0;
+	int	x1;
+	int	y1;
+}	t_wire;// WireFR
+
 typedef struct
 {
     int rows;
@@ -77,6 +90,7 @@ typedef struct	s_fdf {
 
 void draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols);
 void	read_map(char *file, t_fdf *fdf);
+void	set_points(char *file, Point3D **points, int rows, int cols);
 void	error_fdf(int error_code);
 void	ft_errno_exit(char *cause);
 void	ft_perror_exit(char *message);

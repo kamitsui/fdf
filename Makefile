@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/19 15:09:18 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/25 20:16:10 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,10 @@ INC_DIR = include
 # Sources
 SRC_DIR = src
 SRCS = \
-	   fdf.c \
+	   main.c \
 	   draw.c \
 	   read_map.c \
+	   set_points.c \
 	   error.c
 
 # vpath for serching source files in multiple directories
@@ -46,7 +47,7 @@ DEPS = $(addprefix $(DEP_DIR)/, $(SRCS:.c=.d))
 # Compile
 CC = clang
 CF = -Wall -Wextra -Werror
-#CF = -Wall -Wextra -Werror -fsanitize=address
+#CF = -Wall -Wextra -Werror -fsanitize=address -g#error ld: symbol not found
 INC_CF = -I$(INC_DIR)
 DEP_CF = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 MLX_CF = -lmlx

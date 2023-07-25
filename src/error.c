@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 13:26:57 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:48:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 static void	error_message(int error_code)
 {
-	static char	*msg[ERR_NUM] = {MSG_ARG, MSG_MLX};
+	static char	*msg[ERR_NUM] = {MSG_MLX, MSG_WIN, MSG_MAP};
+
 	ft_fprintf(stderr, msg[error_code]);
 }
 

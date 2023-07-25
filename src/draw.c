@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:07:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 22:50:48 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:00:02 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,65 +21,68 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
+void draw_line(t_data *data, t_wire screen)
 {
-	int dx = abs(x1 - x0);
-	int dy = abs(y1 - y0);
-	int sx = (x0 < x1) ? 1 : -1;
-	int sy = (y0 < y1) ? 1 : -1;
+	int dx = abs(screen.x1 - screen.x0);
+	int dy = abs(screen.y1 - screen.y0);
+	int sx = (screen.x0 < screen.x1) ? 1 : -1;
+	int sy = (screen.y0 < screen.y1) ? 1 : -1;
 	int err = dx - dy;
 	int err2;
 
 	while (1)
 	{
-		my_mlx_pixel_put(data, x0, y0, color);
-		if (x0 == x1 && y0 == y1)
+		my_mlx_pixel_put(data, screen.x0, screen.y0, COLOR);
+		if (screen.x0 == screen.x1 && screen.y0 == screen.y1)
 		break;
 		err2 = 2 * err;
 		if (err2 > -dy)
 		{
 			err -= dy;
-			x0 += sx;
+			screen.x0 += sx;
 		}
 		if (err2 < dx)
 		{
 			err += dx;
-			y0 += sy;
+			screen.y0 += sy;
 		}
 	}
 }
 
-#include "ft_printf.h"
-
-void draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols)
+static void	set_screen_point(Point3D points, int *screen_x, int *screen_y)
 {
-	ft_printf("rows:%d cols:%d\n", rows, cols);
-	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < cols; j++) {
-			Point3D current_point = points[i][j];
+	*screen_x = (points.x - points.y) * TILE_SIZE + OFFSET_X;
+	*screen_y = (points.x + points.y) * TILE_SIZE - points.z * TILE_SIZE + OFFSET_Y;
+}
 
-			// Calculate the screen coordinates using isometric projection
-			//int screen_x = (current_point.x - current_point.y) * TILE_SIZE;
-			//int screen_y = (current_point.x + current_point.y) * TILE_SIZE - current_point.z * TILE_SIZE;
-			int screen_x = (current_point.x - current_point.y) * TILE_SIZE + OFFSET_X;
-			int screen_y = (current_point.x + current_point.y) * TILE_SIZE - current_point.z * TILE_SIZE + OFFSET_Y;
+static void	connect_two_points(t_data *data, t_wire screen, Point3D next_point)
+{
+	set_screen_point(next_point, &screen.x1, &screen.y1);
+	draw_line(data, screen);
+}
 
-			// Draw the point
-			my_mlx_pixel_put(data, screen_x, screen_y, COLOR);
+void	draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols)
+{
+	t_wire	screen;
+	int	i;
+	int	j;
 
-			// Connect adjacent points with lines to create the wireframe
-			if (j < cols - 1) {
-				Point3D next_point = points[i][j + 1];
-				int next_screen_x = (next_point.x - next_point.y) * TILE_SIZE + OFFSET_X;
-				int next_screen_y = (next_point.x + next_point.y) * TILE_SIZE - next_point.z * TILE_SIZE + OFFSET_Y;
-				draw_line(data, screen_x, screen_y, next_screen_x, next_screen_y, COLOR);
-			}
-			if (i < rows - 1) {
-				Point3D next_point = points[i + 1][j];
-				int next_screen_x = (next_point.x - next_point.y) * TILE_SIZE + OFFSET_X;
-				int next_screen_y = (next_point.x + next_point.y) * TILE_SIZE - next_point.z * TILE_SIZE + OFFSET_Y;
-				draw_line(data, screen_x, screen_y, next_screen_x, next_screen_y, COLOR);
-			}
+	i = 0;
+	while (i < rows)
+	{
+		j = 0;
+		while (j < cols)
+		{
+			set_screen_point(points[i][j], &screen.x0, &screen.y0);// previsional
+			my_mlx_pixel_put(data, screen.x0, screen.y0, COLOR);
+			if (j < cols - 1)
+				connect_two_points(data, screen, points[i][j + 1]);
+			if (i < rows - 1)
+				connect_two_points(data, screen, points[i + 1][j]);
+			j++;
 		}
+		i++;
 	}
 }
+//#include "ft_printf.h"
+//	ft_printf("rows:%d cols:%d\n", rows, cols);
