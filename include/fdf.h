@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 15:55:15 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:11:17 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@
 # define OFFSET_X		300
 # define OFFSET_Y		150
 # define KEY_ESC		0xff1b
-# define WINDOW_NAME	"fdf"
+# define PROGRAM_NAME	"fdf"
+# define DELIMITERS		" ,"
 //# define WINDOW_WIDTH	1200
 //# define WINDOW_HEIGHT	900
 //# define WINDOW_HEIGHT	108000

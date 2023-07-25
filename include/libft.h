@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42.jp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:55:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 21:47:45 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:21:38 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,15 @@ long	ft_strtol(const char *str, char **endptr, int base);
 char	*ft_strndup(const char *s1, size_t n);
 size_t	ft_count_words(char *str, char delimiter);
 
-// Additional other function
+// Additional other function (from ft_printf)
+int		ft_isxdigit(int c);
 char	*ft_strjoin_free(char const *s1, char const *s2);
 bool	ft_strnequ(char *s1, const char *s2, int n);
 char	*ft_strnew(size_t size);
 void	ft_strdel(char **as);
 char	*ft_itoa_binary(int n);
+
+// Additional other function (from pipex)
+char	*ft_strtok(char *str, char const *sep);
 
 #endif

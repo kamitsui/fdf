@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/24 23:18:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:40:48 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,60 @@ static	void	get_rows_cols(char *file, int *rows, int *cols)
 	return ;
 }
 
-Point3D	**init_points(char *file, t_fdf *fdf)
+Point3D	**allocate_points(int rows, int cols)
 {
-	if (file == NULL || fdf == NULL)
-		exit(1);
-	return (NULL);
+	Point3D	**points;
+	int		i;
+
+	points = (Point3D **)malloc(rows * sizeof(Point3D *));
+	if (points == NULL)
+		ft_errno_exit("malloc");
+	i = 0;
+	while (i < rows)
+	{
+		points[i] = (Point3D *)malloc(cols * sizeof(Point3D));
+		if (points[i] == NULL)
+			ft_errno_exit("malloc");
+		i++;
+	}
+	return (points);
 }
 
-Point3D	**extract_coordinate(char *file, t_fdf *fdf)
+int		get_value(char *token)
 {
-	if (file == NULL || fdf == NULL)
-		exit(1);
-	return (NULL);
+	return (atoi(token));
+}
+
+#include <string.h>// provisional
+
+void	set_points(char *file, Point3D **points, int rows, int cols)
+{
+	int		fd;
+	char	*line;
+	int		i;
+	int		j;
+	char	*token;
+
+	fd = open(file, O_RDONLY);
+	line = get_next_line(fd);
+	i = 0;
+	while (i < rows)
+	{
+		j = 0;
+		token = ft_strtok(line, DELIMITERS);// provisional
+		while (j < cols)
+		{
+			points[i][j].x = j;
+			points[i][j].y = i;
+			points[i][j].z = get_value(token);
+			token = ft_strtok(NULL, DELIMITERS);// provisional
+			j++;
+		}
+		free(line);
+		line = get_next_line(fd);
+		i++;
+	}
+	close(fd);
 }
 
 static void	read_map_provisional(char *file, t_fdf *fdf);// debug
@@ -76,6 +118,7 @@ static void	read_map_provisional(char *file, t_fdf *fdf);// debug
 void	read_map(char *file, t_fdf *fdf)
 {
 	read_map_provisional(file, fdf);
+	//fdf->points = allocate_points(fdf->points, fdf->map->rows, fdf->map->cols);
 	//get_rows_cols(file, &fdf->map->rows, &fdf->map->cols);
 	//fdf->map->cols = get_cols(file);
 	//fdf->points = init_points(file, fdf);
@@ -94,7 +137,7 @@ void	read_map(char *file, t_fdf *fdf)
 
 static void	read_map_provisional(char *file, t_fdf *fdf)
 {
-	Point3D **points;
+//	Point3D **points;
 	//points = fdf->points;
 	int rows, cols;     // Number of rows and columns in the map
 	//int fd = open(file, O_RDONLY);
@@ -115,36 +158,39 @@ static void	read_map_provisional(char *file, t_fdf *fdf)
 	cols = fdf->map->cols;
 
 
-	// Allocate memory for the points array
-	points = (Point3D **)malloc(rows * sizeof(Point3D *));
-	fdf->points = points;
-	if (points == NULL) {
-		//close(fd);
-		fclose(file_ptr);
-		ft_perror_exit("malloc");
-		//fprintf(stderr, "Error: Failed to allocate memory\n");
-		//return 1;
-	}
-	for (int i = 0; i < rows; i++) {
-		points[i] = (Point3D *)malloc(cols * sizeof(Point3D));
-		if (points[i] == NULL) {
-			//close(fd);
-			fclose(file_ptr);
-			ft_perror_exit("malloc");
-			//fprintf(stderr, "Error: Failed to allocate memory\n");
-			//return 1;
-		}
-	}
-	for (int i = 0; i < rows; i++) {
-		for (int j = 0; j < cols; j++) {
-			fscanf(file_ptr, "%d", &points[i][j].z);
-			points[i][j].x = j;
-			points[i][j].y = i;
-			//printf("[%d][%d].z : %d   ", i, j, points[i][j].z);
-		}
-		//printf("\n");
-	}
-	//close(fd);
-	fclose(file_ptr);
+	fdf->points = allocate_points(fdf->map->rows, fdf->map->cols);
+	set_points(file, fdf->points, fdf->map->rows, fdf->map->cols);
+//	// Allocate memory for the points array
+//	points = (Point3D **)malloc(rows * sizeof(Point3D *));
+//	fdf->points = points;
+//	if (points == NULL) {
+//		//close(fd);
+//		fclose(file_ptr);
+//		ft_perror_exit("malloc");
+//		//fprintf(stderr, "Error: Failed to allocate memory\n");
+//		//return 1;
+//	}
+//	for (int i = 0; i < rows; i++) {
+//		points[i] = (Point3D *)malloc(cols * sizeof(Point3D));
+//		if (points[i] == NULL) {
+//			//close(fd);
+//			fclose(file_ptr);
+//			ft_perror_exit("malloc");
+//			//fprintf(stderr, "Error: Failed to allocate memory\n");
+//			//return 1;
+//		}
+//	}
+//	points = fdf->points;
+//	for (int i = 0; i < rows; i++) {
+//		for (int j = 0; j < cols; j++) {
+//			fscanf(file_ptr, "%d", &points[i][j].z);
+//			points[i][j].x = j;
+//			points[i][j].y = i;
+//			//printf("[%d][%d].z : %d   ", i, j, points[i][j].z);
+//		}
+//		//printf("\n");
+//	}
+//	//close(fd);
+//	fclose(file_ptr);
 }
 
