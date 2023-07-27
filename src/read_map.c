@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 18:43:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/27 23:04:00 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ static	void	get_rows_cols(char *file, int *rows, int *cols)
 	return ;
 }
 
-static Point3D	**allocate_points(int rows, int cols)
+static t_Point3D	**allocate_points(int rows, int cols)
 {
-	Point3D	**points;
-	int		i;
+	t_Point3D	**points;
+	int			i;
 
-	points = (Point3D **)malloc(rows * sizeof(Point3D *));
+	points = (t_Point3D **)malloc(rows * sizeof(t_Point3D *));
 	if (points == NULL)
 		ft_errno_exit("malloc");
 	i = 0;
 	while (i < rows)
 	{
-		points[i] = (Point3D *)malloc(cols * sizeof(Point3D));
+		points[i] = (t_Point3D *)malloc(cols * sizeof(t_Point3D));
 		if (points[i] == NULL)
 			ft_errno_exit("malloc");
 		i++;

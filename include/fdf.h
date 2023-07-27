@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 22:56:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/27 22:56:20 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,88 +50,67 @@
 //# define WINDOW_HEIGHT	900
 //# define WINDOW_HEIGHT	108000
 
+// Structure : Bresenham's line algorithm
+typedef struct s_line {
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	err2;
+}	t_line;
+
 // FDF data structure
 
-typedef struct	s_wire {
+typedef struct s_wire {
 	int	x0;
 	int	y0;
 	int	x1;
 	int	y1;
-}	t_wire;// WireFR
+}	t_WireFR;
 
-typedef struct
+typedef struct s_Map
 {
-    int rows;
-    int cols;
-} Map;
+	int	rows;
+	int	cols;
+}	t_Map;
 
-typedef struct
+typedef struct s_Point3D
 {
-    int x;
-    int y;
-    int z;
-} Point3D;
+	int	x;
+	int	y;
+	int	z;
+}	t_Point3D;
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-}				t_data;
+}	t_data;
 
-typedef struct	s_fdf {
-    void	*mlx_ptr;      // MiniLibX graphics system pointer
-    void	*win_ptr;      // Window pointer
-	t_data	*data;		// Image pointer
-    Point3D	**points;   // 2D array to store the points
-	Map		*map; // Map size
-} t_fdf;
+typedef struct s_fdf {
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_data		*data;
+	t_Point3D	**points;
+	t_Map		*map;
+}	t_fdf;
+//	*mlx_ptr;	// MiniLibX graphics system pointer
+//	*win_ptr;	// Window pointer
+//	*data;		// Image pointer
+//	**points;	// 2D array to store the points
+//	*map;		// Map size
 
-void draw_wireframe_model(t_data *data, Point3D **points, int rows, int cols);
+void	draw_wireframe_model(t_data *data, t_Point3D **points,
+			int rows, int cols);
+void	draw_line(t_data *data, t_WireFR screen);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	read_map(char *file, t_fdf *fdf);
-void	set_points(char *file, Point3D **points, int rows, int cols);
+void	set_points(char *file, t_Point3D **points, int rows, int cols);
 void	error_fdf(int error_code);
 void	ft_errno_exit(char *cause);
 void	ft_perror_exit(char *message);
 
 #endif
-
-//typedef struct s_fdf
-//{
-//	t_map	*map;
-//	void	*mlx;
-//	int		window_x;
-//	int		window_y;
-//	void	*window;
-//	t_data	*data;
-////	t_camera	*camera;
-//}	t_fdf;
-
-// Image data structure
-//typedef struct s_data
-//{
-//	void	*img;
-//	char	*addr;
-//	int		bits_per_pixel;
-//	int		line_length;
-//	int		endian;
-//	t_line	*line;
-//}	t_data;
-
-// Current line being printed
-//typedef struct s_line
-//{
-//	t_point	start;
-//	t_point	end;
-//	float	transform_z;
-//}	t_line;
-
-// Single point structure
-//typedef struct s_point
-//{
-//	float	x;
-//	float	y;
-//	float	z;
-//	int		color;
-//}	t_point;

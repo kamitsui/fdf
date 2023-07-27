@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 18:18:49 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 19:05:40 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/27 23:03:10 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-static void	get_value(Point3D *points, int i, int j, char *token)
+static void	get_value(t_Point3D *points, int i, int j, char *token)
 {
 	points->x = j;
 	points->y = i;
 	points->z = ft_atoi((const char *)token);
 }
 
-void	set_points(char *file, Point3D **points, int rows, int cols)
+void	set_points(char *file, t_Point3D **points, int rows, int cols)
 {
 	int		fd;
 	char	*line;

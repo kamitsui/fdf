@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42.jp>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 14:55:57 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 15:21:38 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/27 22:04:46 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,10 @@ char	*ft_itoa_binary(int n);
 
 // Additional other function (from pipex)
 char	*ft_strtok(char *str, char const *sep);
+
+// Additional other function (from fdf minilibx)
+int		ft_abs(int i);
+int		ft_intcmp(int a, int b);
+int		ft_sign(int num);
 
 #endif

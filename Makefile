@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/25 20:16:10 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/27 21:39:50 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRC_DIR = src
 SRCS = \
 	   main.c \
 	   draw.c \
+	   draw_line.c \
+	   my_mlx.c \
 	   read_map.c \
 	   set_points.c \
 	   error.c
