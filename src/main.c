@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/28 21:25:35 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:54:11 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	main(int ac, char *av[])
 	fdf.mlx_ptr = mlx_init();
 	if (fdf.mlx_ptr == NULL)
 		error_fdf(ERR_MLX);
-	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "fdf");
+	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, NAME);
 	if (fdf.win_ptr == NULL)
 		error_fdf(ERR_WIN);
 	data.img = mlx_new_image(fdf.mlx_ptr, IMG_WIDTH, IMG_HEIGHT);

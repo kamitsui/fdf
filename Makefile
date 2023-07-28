@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/28 19:26:43 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/28 22:35:35 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 NAME = fdf
 
 # Libraries
-MLX_PATH = $(HOME)/lib
+#MLX_PATH = $(HOME)/lib
+MLX_PATH = $(HOME)/lib/minilibx/minilibx_macos
 # x84_64
 #MLX_DYLB = $(MLX_PATH)/libmlx.dylib
 # arm64
@@ -56,7 +57,8 @@ CF = -Wall -Wextra -Werror
 # x84_64
 #INC_CF = -I$(INC_DIR)
 # arm64
-INC_CF = -I$(INC_DIR) -I$(MLX_PATH)/minilibx/minilibx_macos
+#INC_CF = -I$(INC_DIR) -I$(MLX_PATH)/minilibx/minilibx_macos
+INC_CF = -I$(INC_DIR) -I$(MLX_PATH)
 DEP_CF = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 MLX_CF = -lmlx
 FRAMEWORK_CF = -framework OpenGL -framework AppKit
@@ -80,7 +82,8 @@ all: $(NAME)
 #	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
 # on Macbook Air (arm64)
 $(NAME): $(LIB_PRINTF) $(LIB_MLX) $(DEPS) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
+	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) $(LIB_MLX) $(FRAMEWORK_CF)
+#	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
 
 # Library target
 $(LIB_PRINTF): $(LIBFT)

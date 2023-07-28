@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/28 21:21:24 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:44:39 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 /*
  * Other configuration
  */
-# define KEY_ESC		53
-# define PROGRAM_NAME	"fdf"
-# define DELIMITERS		" ,"
+# define KEY_ESC	53
+# define NAME		"fdf"
+# define DELIMITERS	" ,"
 
 /*
  * Isometric Projection configuration

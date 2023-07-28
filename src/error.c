@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:05:41 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/25 19:48:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:45:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_errno_exit(char *cause)
 
 	error_number = errno;
 	error_message = strerror(error_number);
-	ft_fprintf(stderr, "%s: %s: %s\n", PROGRAM_NAME, cause, error_message);
+	ft_fprintf(stderr, "%s: %s: %s\n", NAME, cause, error_message);
 	exit (1);
 }
 
