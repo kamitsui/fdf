@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/27 22:57:11 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:38:09 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,35 +68,7 @@ int	main(int ac, char *av[])
 	mlx_key_hook(fdf.win_ptr, &my_key_function, &fdf);
 	mlx_loop(fdf.mlx_ptr);
 }
-// FDF data structure
-//typedef struct
-//{
-//    int rows;
-//    int cols;
-//} Map;
-//
-//typedef struct
-//{
-//    int x;
-//    int y;
-//    int z;
-//} Point3D;
-//
-//typedef struct	s_data {
-//	void	*img;
-//	char	*addr;
-//	int		bits_per_pixel;
-//	int		size_line;
-//	int		endian;
-//}				t_data;
-//
-//typedef struct	s_fdf {
-//    void *mlx_ptr;      // MiniLibX graphics system pointer
-//    void *win_ptr;      // Window pointer
-//	t_data	*data;		// Image pointer
-//    Point3D **points;   // 2D array to store the points
-//	Map map;
-//} t_fdf;
 //	ft_printf("Bits per pixel: %d\n", data.bits_per_pixel);
 //	ft_printf("Size of each line: %d bytes\n", data.size_line);
 //	ft_printf("Endianness: %d\n", data.endian);
+//#include <keysymdef.h> // not found file

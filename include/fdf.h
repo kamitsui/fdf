@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/27 22:56:20 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:34:05 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,21 @@
 # define COLOR			0xFFFFFF // Color value for points and lines (white)
 # define OFFSET_X		300
 # define OFFSET_Y		150
-# define KEY_ESC		0xff1b
+# define KEY_ESC		0xFF1B
+//# define KEY_ESC		53// same with 0xff1b
 # define PROGRAM_NAME	"fdf"
 # define DELIMITERS		" ,"
 //# define WINDOW_WIDTH	1200
 //# define WINDOW_HEIGHT	900
 //# define WINDOW_HEIGHT	108000
+
+/*
+ * Isometric Projection configuration
+ */
+#define ANGLE_X 0.523599	// Approximate 30 degrees in radians
+#define ANGLE_Y 0.615472	// Approximate 35.26 degrees in radians
+#define ANGLE_Z 0.523599	// Approximate 30 degrees in radians
+
 
 // Structure : Bresenham's line algorithm
 typedef struct s_line {
@@ -105,7 +114,7 @@ typedef struct s_fdf {
 
 void	draw_wireframe_model(t_data *data, t_Point3D **points,
 			int rows, int cols);
-void	draw_line(t_data *data, t_WireFR screen);
+void	draw_line(t_data *data, t_WireFR *screen);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	read_map(char *file, t_fdf *fdf);
 void	set_points(char *file, t_Point3D **points, int rows, int cols);
