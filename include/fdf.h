@@ -6,60 +6,69 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/28 17:34:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:21:24 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-// Error code
-//enum e_state
-//{
-//	ERR_ARG,
-//	ERR_MLX,
-//	ERR_WIN,
-//};
+/* -------- Macro -------- */
 
-// Error message
+/*
+ * Error message
+ */
 # define MSG_MLX	"Error: Failed to initialize MiniLibX\n"
 # define MSG_WIN	"Error: Failed to create a window\n"
 # define MSG_MAP	"Error: Unmatched number of columns elements in Map file\n"
 
-// Error number
-# define ERR_MLX	0
-# define ERR_WIN	1
-# define ERR_MAP	2
-# define ERR_NUM	3
+/*
+ * Error number
+ */
+# define ERR_MLX	0	// mlx_init() faile
+# define ERR_WIN	1	// mlx_new_window() faile
+# define ERR_MAP	2	// Irregular of 3D MAP data (*.fdf)
+# define ERR_NUM	3	// Number of fdf-only error types
 
 /*
- * Window configuration
+ * Window, Image, configuration
  */
-# define WIN_WIDTH		1000  // Width of the window
-# define WIN_HEIGHT		800 // Height of the window
-# define IMG_WIDTH		800  // Width of the window
-# define IMG_HEIGHT		600 // Height of the window
-# define TILE_SIZE		15   // Size of each tile
-# define COLOR			0xFFFFFF // Color value for points and lines (white)
-# define OFFSET_X		300
-# define OFFSET_Y		150
-# define KEY_ESC		0xFF1B
-//# define KEY_ESC		53// same with 0xff1b
+# define WIN_WIDTH		1000	// Width of the window
+# define WIN_HEIGHT		800		// Height of the window
+
+/*
+ * Image configuration
+ */
+# define IMG_WIDTH		800	// Width of the window
+# define IMG_HEIGHT		600	// Height of the window
+
+/*
+ * Wire Frame configuration
+ */
+# define TILE_SIZE		15			// Size of each tile
+# define COLOR			0xFFFFFF	// Color value for points and lines (white)
+# define OFFSET_X		300			// 2D screen X coordinate origin
+# define OFFSET_Y		150			// 2D screen Y coordinate origin
+
+/*
+ * Other configuration
+ */
+# define KEY_ESC		53
 # define PROGRAM_NAME	"fdf"
 # define DELIMITERS		" ,"
-//# define WINDOW_WIDTH	1200
-//# define WINDOW_HEIGHT	900
-//# define WINDOW_HEIGHT	108000
 
 /*
  * Isometric Projection configuration
  */
-#define ANGLE_X 0.523599	// Approximate 30 degrees in radians
-#define ANGLE_Y 0.615472	// Approximate 35.26 degrees in radians
-#define ANGLE_Z 0.523599	// Approximate 30 degrees in radians
+# define ANGLE_X 0.523599	// Approximate 30 degrees in radians
+# define ANGLE_Y 0.615472	// Approximate 35.26 degrees in radians
+# define ANGLE_Z 0.523599	// Approximate 30 degrees in radians
 
+/* -------- Structure -------- */
 
-// Structure : Bresenham's line algorithm
+/*
+ * Bresenham's line algorithm -> draw_line()
+ */
 typedef struct s_line {
 	int	dx;
 	int	dy;
@@ -69,8 +78,9 @@ typedef struct s_line {
 	int	err2;
 }	t_line;
 
-// FDF data structure
-
+/*
+ * Wire Frame Model -> draw_wireframe_model()
+ */
 typedef struct s_wire {
 	int	x0;
 	int	y0;
@@ -78,12 +88,18 @@ typedef struct s_wire {
 	int	y1;
 }	t_WireFR;
 
+/*
+ * Count elements in 3D Map data ( fdf -> t_Map *map)
+ */
 typedef struct s_Map
 {
 	int	rows;
 	int	cols;
 }	t_Map;
 
+/*
+ * 3D Coordinate ( fdf -> t_Point3D **points )
+ */
 typedef struct s_Point3D
 {
 	int	x;
@@ -91,6 +107,14 @@ typedef struct s_Point3D
 	int	z;
 }	t_Point3D;
 
+/*
+ * Image data address and associated information
+ * 		img				Image instance
+ * 		addr			Image data address
+ * 		bits_per_pixel	Bits per pixel in the image
+ * 		size_line		Size of a single line in bytes
+ * 		endian			Endianness of the image data
+ */
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -99,25 +123,43 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+/*
+ * FDF main data structure :
+ * holds all the information necessary for the fdf to run,
+ * so its made easier to be passed by reference by sub-functions
+ * 		mlx_ptr		MiniLibX instance
+ * 		win_ptr		Window instance
+ * 		img_data	Image data
+ * 		points		2D array to store 3D Coordinate
+ * 		map			3D Map size
+ */
 typedef struct s_fdf {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_data		*data;
+	t_data		*img_data;
 	t_Point3D	**points;
 	t_Map		*map;
 }	t_fdf;
-//	*mlx_ptr;	// MiniLibX graphics system pointer
-//	*win_ptr;	// Window pointer
-//	*data;		// Image pointer
-//	**points;	// 2D array to store the points
-//	*map;		// Map size
 
+/* -------- Functions -------- */
+
+/*
+ * Drawing Functions
+ */
 void	draw_wireframe_model(t_data *data, t_Point3D **points,
 			int rows, int cols);
 void	draw_line(t_data *data, t_WireFR *screen);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+/*
+ * Importing 3D coordinate data
+ */
 void	read_map(char *file, t_fdf *fdf);
 void	set_points(char *file, t_Point3D **points, int rows, int cols);
+
+/*
+ * Error management
+ */
 void	error_fdf(int error_code);
 void	ft_errno_exit(char *cause);
 void	ft_perror_exit(char *message);

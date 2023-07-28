@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/27 21:39:50 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/28 19:26:43 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,11 @@
 NAME = fdf
 
 # Libraries
-MLX_PATH = /Users/kamitsui/lib
-MLX_DYLB = $(MLX_PATH)/libmlx.dylib
+MLX_PATH = $(HOME)/lib
+# x84_64
+#MLX_DYLB = $(MLX_PATH)/libmlx.dylib
+# arm64
+LIB_MLX = $(MLX_PATH)/libmlx.a
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIB_PRINTF_DIR = ft_printf
@@ -50,7 +53,10 @@ DEPS = $(addprefix $(DEP_DIR)/, $(SRCS:.c=.d))
 CC = clang
 CF = -Wall -Wextra -Werror
 #CF = -Wall -Wextra -Werror -fsanitize=address -g#error ld: symbol not found
-INC_CF = -I$(INC_DIR)
+# x84_64
+#INC_CF = -I$(INC_DIR)
+# arm64
+INC_CF = -I$(INC_DIR) -I$(MLX_PATH)/minilibx/minilibx_macos
 DEP_CF = -MMD -MP -MF $(@:$(OBJ_DIR)/%.o=$(DEP_DIR)/%.d)
 MLX_CF = -lmlx
 FRAMEWORK_CF = -framework OpenGL -framework AppKit
@@ -69,7 +75,11 @@ $(DEP_DIR)/%.d: %.c
 all: $(NAME)
 
 # Target
-$(NAME): $(LIB_PRINTF) $(MLX_DYLB) $(DEPS) $(OBJS)
+# on 42School iMac (x86_64)
+#$(NAME): $(LIB_PRINTF) $(MLX_DYLB) $(DEPS) $(OBJS)
+#	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
+# on Macbook Air (arm64)
+$(NAME): $(LIB_PRINTF) $(LIB_MLX) $(DEPS) $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
 
 # Library target

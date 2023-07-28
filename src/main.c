@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/28 17:38:09 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:25:35 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ static int	my_key_function(int keycode, t_fdf *fdf)
 		}
 		free(fdf->points);
 		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
-		mlx_destroy_image(fdf->mlx_ptr, fdf->data->img);
+		mlx_destroy_image(fdf->mlx_ptr, fdf->img_data->img);
+		exit(0);
 	}
-	exit(0);
+	return (0);
 }
 
 static void	error_arg(char *program_name)
@@ -48,7 +49,7 @@ int	main(int ac, char *av[])
 	t_data	data;
 	t_Map	map;
 
-	fdf.data = &data;
+	fdf.img_data = &data;
 	fdf.map = &map;
 	if (ac != 2)
 		error_arg(av[0]);
