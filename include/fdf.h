@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/28 21:44:39 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/30 17:49:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,38 @@
 # define ANGLE_Y 0.615472	// Approximate 35.26 degrees in radians
 # define ANGLE_Z 0.523599	// Approximate 30 degrees in radians
 
+/*
+ * Color value
+ */
+# define C_WHITE	0xffffff
+# define C_GREY		0x303030
+# define C_RED		0xff0000
+
 /* -------- Structure -------- */
 
 /*
+ * Transition the color along the line
+ */
+typedef struct s_Color
+{
+	int	start_r;
+	int	start_g;
+	int	start_b;
+	int	end_r;
+	int	end_g;
+	int	end_b;
+}	t_Color;
+
+/*
  * Bresenham's line algorithm -> draw_line()
+ *  px,py	Put pixcel in x,y_coordinates
+ *  dx,dy	Absolute difference in x,y_coordinates
+ *  sx,sy	Step direction for x,y (1 or -1)
+ *  err		Error term
  */
 typedef struct s_line {
+	int	px;
+	int	py;
 	int	dx;
 	int	dy;
 	int	sx;
@@ -84,8 +110,10 @@ typedef struct s_line {
 typedef struct s_wire {
 	int	x0;
 	int	y0;
+	int	color0;
 	int	x1;
 	int	y1;
+	int	color1;
 }	t_WireFR;
 
 /*
