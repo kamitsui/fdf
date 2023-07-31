@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/30 17:49:34 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:03:42 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 /*
  * Transition the color along the line
  */
-typedef struct s_Color
+typedef struct s_clr
 {
 	int	start_r;
 	int	start_g;
@@ -84,11 +84,12 @@ typedef struct s_Color
 	int	end_r;
 	int	end_g;
 	int	end_b;
-}	t_Color;
+}	t_clr;
 
 /*
  * Bresenham's line algorithm -> draw_line()
  *  px,py	Put pixcel in x,y_coordinates
+ *  pc		Put pixcel color
  *  dx,dy	Absolute difference in x,y_coordinates
  *  sx,sy	Step direction for x,y (1 or -1)
  *  err		Error term
@@ -96,6 +97,7 @@ typedef struct s_Color
 typedef struct s_line {
 	int	px;
 	int	py;
+	int	pc;
 	int	dx;
 	int	dy;
 	int	sx;
@@ -114,7 +116,7 @@ typedef struct s_wire {
 	int	x1;
 	int	y1;
 	int	color1;
-}	t_WireFR;
+}	t_wire;
 
 /*
  * Count elements in 3D Map data ( fdf -> t_Map *map)
@@ -176,7 +178,7 @@ typedef struct s_fdf {
  */
 void	draw_wireframe_model(t_data *data, t_Point3D **points,
 			int rows, int cols);
-void	draw_line(t_data *data, t_WireFR *screen);
+void	draw_line(t_data *data, t_wire *screen);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*
@@ -191,5 +193,11 @@ void	set_points(char *file, t_Point3D **points, int rows, int cols);
 void	error_fdf(int error_code);
 void	ft_errno_exit(char *cause);
 void	ft_perror_exit(char *message);
+
+/*
+ * Initialize
+ */
+void	init_line(t_line *line, t_wire *screen);
+void	init_color(t_clr *color, int start_color, int end_color);
 
 #endif

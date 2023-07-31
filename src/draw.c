@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:07:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/30 16:54:03 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:05:25 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	set_screen_point(t_Point3D points, int *new_x, int *new_y)
 		- old_z;
 }
 
-static void	connect_two_points(t_data *data, t_WireFR screen,
+static void	connect_two_points(t_data *data, t_wire screen,
 		t_Point3D next_point)
 {
 	set_screen_point(next_point, &screen.x1, &screen.y1);
@@ -38,9 +38,9 @@ static void	connect_two_points(t_data *data, t_WireFR screen,
 void	draw_wireframe_model(t_data *data, t_Point3D **points,
 		int rows, int cols)
 {
-	t_WireFR	screen;
-	int			i;
-	int			j;
+	t_wire	screen;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < rows)

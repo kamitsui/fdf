@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/28 22:35:35 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/31 13:51:04 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS = \
 	   my_mlx.c \
 	   read_map.c \
 	   set_points.c \
-	   error.c
+	   error.c \
+	   init.c
 
 # vpath for serching source files in multiple directories
 vpath %.c $(SRC_DIR)
