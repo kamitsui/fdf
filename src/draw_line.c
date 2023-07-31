@@ -6,12 +6,13 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:35:07 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 16:32:08 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:53:28 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
+#include "ft_printf.h"// for debug
 
 // propo is: Proportion of moving points to line span
 static int	transition_color(int start, int end, int move_point, t_clr *color)
@@ -51,12 +52,32 @@ static int	get_current_color(t_line *line, t_wire *screen, t_clr *color)
 	return (transition_color(start, end, move_point, color));
 }
 
+void	debug_line(int x0, int y0, int color0,
+		int x1, int y1, int color1)
+{
+	ft_printf("\n\n---- draw_line ----  start -> end\n");
+	ft_printf("start\tx0:%d y0:%d color0:%X\n", x0, y0, color0);
+	ft_printf("end  \tx1:%d y1:%d color1:%X\n", x1, y1, color1);
+}
+
+void	debug_count(int px, int py, int pc)
+{
+	static int i = 0;
+	ft_printf("draw_loop : %d\tpx:%d\tpy:%d\tpc:%X\n", i++, px, py, pc);
+}
+
 static void	draw_loop(t_line *line, t_wire *screen, t_clr *color, t_data *data)
 {
+	debug_line(screen->x0, screen->y0, screen->color0, screen->x1, screen->y1, screen->color1);
 	while (1)
 	{
+		if (line->px >= IMG_WIDTH || line->px <= 0 ||
+					line->py >= IMG_HEIGHT || line->py <= 0)
+			break ;
+		debug_count(line->px, line->py, line->pc);
 		line->pc = get_current_color(line, screen, color);
-		my_mlx_pixel_put(data, line->px, line->py, line->pc);
+			my_mlx_pixel_put(data, line->px, line->py, line->pc);
+//		ft_printf("%d %d %X\n", line->px, line->py, line->pc);
 		if (line->px == screen->x1 && line->py == screen->y1)
 			break ;
 		line->err2 = 2 * line->err;
@@ -82,27 +103,5 @@ void	draw_line(t_data *data, t_wire *screen)
 	init_line(&line, screen);
 	init_color(&color, screen->color0, screen->color1);
 	draw_loop(&line, screen, &color, data);
+	ft_printf("after draw_loop()\n");
 }
-//	screen->color0 = C_WHITE;
-//	screen->color1 = C_RED;
-//	while (1)
-//	{
-//		if (line.dx > 0)
-//			line.pc = transition_color(screen->x0, screen->x1, line.px, &color);
-//		else
-//			line.pc = transition_color(screen->y0, screen->y1, line.py, &color);
-//		my_mlx_pixel_put(data, line.px, line.py, line.pc);
-//		if (line.px == screen->x1 && line.py == screen->y1)
-//			break ;
-//		line.err2 = 2 * line.err;
-//		if (line.err2 > -line.dy)
-//		{
-//			line.err -= line.dy;
-//			line.px += line.sx;
-//		}
-//		if (line.err2 < line.dx)
-//		{
-//			line.err += line.dx;
-//			line.py += line.sy;
-//		}
-//	}

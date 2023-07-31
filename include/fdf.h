@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 14:58:47 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 23:26:02 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 /*
  * Image configuration
  */
-# define IMG_WIDTH		800	// Width of the window
-# define IMG_HEIGHT		600	// Height of the window
+# define IMG_WIDTH		1000	// Width of the window
+# define IMG_HEIGHT		800	// Height of the window
 
 /*
  * Wire Frame configuration
@@ -49,6 +49,8 @@
 # define COLOR			0xFFFFFF	// Color value for points and lines (white)
 # define OFFSET_X		300			// 2D screen X coordinate origin
 # define OFFSET_Y		150			// 2D screen Y coordinate origin
+# define WIN_X		0			// X coordinate to place the image in the window
+# define WIN_Y		0			// X coordinate to place the image in the window
 
 /*
  * Other configuration
