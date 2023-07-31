@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:07:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 14:05:25 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:32:21 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <math.h>
 
 // Function to perform isometric projection
-static void	set_screen_point(t_Point3D points, int *new_x, int *new_y)
+static void	set_screen_point(t_Point3D points,
+		int *new_x, int *new_y, int *new_color)
 {
 	int	old_x;
 	int	old_y;
@@ -26,12 +27,13 @@ static void	set_screen_point(t_Point3D points, int *new_x, int *new_y)
 	*new_x = (int)(cos(ANGLE_Y) * (old_x) - cos(ANGLE_Y) * (old_y)) + OFFSET_X;
 	*new_y = (int)(sin(ANGLE_X) * (old_x) + sin(ANGLE_X) * (old_y)) + OFFSET_Y
 		- old_z;
+	*new_color = points.color;
 }
 
 static void	connect_two_points(t_data *data, t_wire screen,
 		t_Point3D next_point)
 {
-	set_screen_point(next_point, &screen.x1, &screen.y1);
+	set_screen_point(next_point, &screen.x1, &screen.y1, &screen.color1);
 	draw_line(data, &screen);
 }
 
@@ -48,8 +50,9 @@ void	draw_wireframe_model(t_data *data, t_Point3D **points,
 		j = 0;
 		while (j < cols)
 		{
-			set_screen_point(points[i][j], &screen.x0, &screen.y0);
-			my_mlx_pixel_put(data, screen.x0, screen.y0, COLOR);
+			set_screen_point(points[i][j], &screen.x0, &screen.y0,
+				&screen.color0);
+			my_mlx_pixel_put(data, screen.x0, screen.y0, screen.color0);
 			if (j < cols - 1)
 				connect_two_points(data, screen, points[i][j + 1]);
 			if (i < rows - 1)

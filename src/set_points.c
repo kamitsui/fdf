@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 18:18:49 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/27 23:03:10 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:20:01 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+
+static void	get_color(t_Point3D *points, char *token)
+{
+	char	*end;
+
+	if (ft_strnequ(token, "0x", 2) == true)
+		points->color = ft_strtol(token, &end, 16);
+	else
+		points->color = COLOR;
+}
 
 static void	get_value(t_Point3D *points, int i, int j, char *token)
 {
@@ -43,6 +53,7 @@ void	set_points(char *file, t_Point3D **points, int rows, int cols)
 		{
 			get_value(&points[i][j], i, j, token);
 			token = ft_strtok(NULL, DELIMITERS);
+			get_color(&points[i][j], token);
 			j++;
 		}
 		free(line);

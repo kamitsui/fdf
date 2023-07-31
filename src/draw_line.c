@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 21:35:07 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 14:02:51 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 16:32:08 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ void	draw_line(t_data *data, t_wire *screen)
 	t_line	line;
 	t_clr	color;
 
-	screen->color0 = C_WHITE;
-	screen->color1 = C_RED;
 	init_line(&line, screen);
 	init_color(&color, screen->color0, screen->color1);
 	draw_loop(&line, screen, &color, data);
 }
+//	screen->color0 = C_WHITE;
+//	screen->color1 = C_RED;
 //	while (1)
 //	{
 //		if (line.dx > 0)

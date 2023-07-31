@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 14:03:42 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:58:47 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ typedef struct s_Point3D
 	int	x;
 	int	y;
 	int	z;
+	int	color;
 }	t_Point3D;
 
 /*
