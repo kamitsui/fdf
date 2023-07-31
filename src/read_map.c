@@ -6,12 +6,11 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/27 23:04:00 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:49:59 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "ft_printf.h"
 #include "libft.h"
 #include "get_next_line.h"
 #include <stdlib.h>
@@ -21,8 +20,11 @@
 static void	count_width_depth(int fd, char *line, int *width, int *depth)
 {
 	int		pre_width;
+	char	*line_trim;
 
-	*width = ft_count_words(line, ' ');
+	line_trim = ft_strtrim(line, " \n");
+	*width = ft_count_words(line_trim, ' ');
+	free(line_trim);
 	pre_width = *width;
 	*depth = *depth + 1;
 	while (1)
@@ -30,7 +32,9 @@ static void	count_width_depth(int fd, char *line, int *width, int *depth)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		*width = ft_count_words(line, ' ');
+		line_trim = ft_strtrim(line, " \n");
+		*width = ft_count_words(line_trim, ' ');
+		free(line_trim);
 		if (pre_width != *width)
 			error_fdf(ERR_MAP);
 		if (ft_isprint(*line) == true)
@@ -80,44 +84,6 @@ static t_Point3D	**allocate_points(int rows, int cols)
 	}
 	return (points);
 }
-
-//void	get_value(Point3D points, int i, int j, char *token)
-//{
-//	points.x = j;
-//	points.y = i;
-//	points.z = atoi(token);
-//}
-//
-//void	set_points(char *file, Point3D **points, int rows, int cols)
-//{
-//	int		fd;
-//	char	*line;
-//	int		i;
-//	int		j;
-//	char	*token;
-//
-//	fd = open(file, O_RDONLY);
-//	line = get_next_line(fd);
-//	i = 0;
-//	while (i < rows)
-//	{
-//		j = 0;
-//		token = ft_strtok(line, DELIMITERS);
-//		while (j < cols)
-//		{
-//			get_value(points[i][j], i, j, token);
-//			token = ft_strtok(NULL, DELIMITERS);
-//			j++;
-//		}
-//		free(line);
-//		line = get_next_line(fd);
-//		i++;
-//	}
-//	close(fd);
-//}
-//			points[i][j].x = j;
-//			points[i][j].y = i;
-//			points[i][j].z = atoi(token);
 
 void	read_map(char *file, t_fdf *fdf)
 {

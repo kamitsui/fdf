@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 20:51:49 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/27 22:13:47 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/07/31 20:44:46 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS = \
 	   ft_strnlen.c \
 	   ft_strtol.c \
 	   ft_strtok.c \
+	   ft_strtrim.c \
 	   \
 	   get_next_line.c
 
@@ -53,7 +54,8 @@ OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 DEPS = $(addprefix $(DEP_DIR)/, $(SRCS:%.c=%.d))
 
 # Vpath
-vpath $(SRCS) $(SRC_DIR)
+#vpath $(SRCS) $(SRC_DIR)
+vpath %.c $(SRC_DIR)
 
 # Library name
 LIB = libft.a
@@ -67,7 +69,7 @@ INC = -I$(INC_DIR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(DEP_DIR)/%.d
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(DEP_DIR)
-	$(CC) $(CFLAGS) $(DFLAGS) $(INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(DEP_DIR)/%.d: $(SRC_DIR)/%.c
 	@mkdir -p $(DEP_DIR)
@@ -78,8 +80,6 @@ all: $(LIB)
 # Library target
 $(LIB): $(OBJS)
 	ar rcs $@ $^
-
-$(OBJS): $(DEPS)
 
 # Clean target
 clean:
