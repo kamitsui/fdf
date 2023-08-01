@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 16:47:03 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 23:26:02 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/01 10:30:37 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@
 /*
  * Wire Frame configuration
  */
-# define TILE_SIZE		15			// Size of each tile
-# define COLOR			0xFFFFFF	// Color value for points and lines (white)
-# define OFFSET_X		300			// 2D screen X coordinate origin
-# define OFFSET_Y		150			// 2D screen Y coordinate origin
+# define TILE_SIZE	15			// Size of each tile
+# define COLOR		0xFFFFFF	// Color value for points and lines (white)
+# define OFFSET_X	500			// 2D screen X coordinate origin
+# define OFFSET_Y	300			// 2D screen Y coordinate origin
 # define WIN_X		0			// X coordinate to place the image in the window
 # define WIN_Y		0			// X coordinate to place the image in the window
 

@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/31 16:26:11 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/31 23:29:07 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/01 10:54:07 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,16 +23,11 @@
 #./fdf test_maps/10-2.fdf &\
 
 #echo "10-70.fdf map\n"
-./fdf_default test_maps/10-70.fdf &\
-./fdf test_maps/10-70.fdf &\
+#./fdf_default test_maps/10-70.fdf &\
+#./fdf test_maps/10-70.fdf
 
-#                    #
-#       NG Map       #
-#                    #
-
-
-#./fdf_default test_maps/100-6.fdf &\
-#./fdf test_maps/100-6.fdf &\
+./fdf_default test_maps/100-6.fdf &\
+./fdf test_maps/100-6.fdf
 #
 #./fdf_default test_maps/20-60.fdf &\
 #./fdf test_maps/20-60.fdf &\
@@ -85,3 +80,8 @@
 #./fdf_default test_maps/t2.fdf &
 #./fdf test_maps/t2.fdf &
 #
+
+#                    #
+#       NG Map       #
+#                    #
+

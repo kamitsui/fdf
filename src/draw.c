@@ -6,13 +6,12 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 21:07:22 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 23:25:56 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/01 10:51:34 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <math.h>
-#include "ft_printf.h"//for debug
 
 // Function to perform isometric projection
 static void	set_screen_point(t_Point3D points,
@@ -36,7 +35,6 @@ static void	connect_two_points(t_data *data, t_wire screen,
 {
 	set_screen_point(next_point, &screen.x1, &screen.y1, &screen.color1);
 	draw_line(data, &screen);
-	ft_printf("after draw_line()\n");
 }
 
 void	draw_wireframe_model(t_data *data, t_Point3D **points,
@@ -46,7 +44,6 @@ void	draw_wireframe_model(t_data *data, t_Point3D **points,
 	int		i;
 	int		j;
 
-	ft_printf("rows:%d cols:%d\t\tin draw_wireframe_model()\n", rows, cols);
 	i = 0;
 	while (i < rows)
 	{
@@ -55,12 +52,6 @@ void	draw_wireframe_model(t_data *data, t_Point3D **points,
 		{
 			set_screen_point(points[i][j], &screen.x0, &screen.y0,
 				&screen.color0);
-//			if ((screen.x0 <= IMG_WIDTH && screen.x0 >= 0) ||
-//						(screen.y0 <= IMG_HEIGHT && screen.y0 >= 0))
-			if (screen.x0 >= IMG_WIDTH || screen.x0 <= 0 ||
-						screen.y0 >= IMG_HEIGHT || screen.y0 <= 0)
-				break ;
-			my_mlx_pixel_put(data, screen.x0, screen.y0, screen.color0);
 			if (j < cols - 1)
 				connect_two_points(data, screen, points[i][j + 1]);
 			if (i < rows - 1)
