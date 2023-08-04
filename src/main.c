@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 17:09:35 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/08/01 10:44:48 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/04 21:48:15 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,22 @@
 #include <math.h>
 #include "ft_printf.h"
 #include "fdf.h"
+
+static int	close_window(t_fdf *fdf)
+{
+	int		i;
+
+	i = 0;
+	while (i < fdf->map->rows)
+	{
+		free(fdf->points[i]);
+		i++;
+	}
+	free(fdf->points);
+	mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
+	mlx_destroy_image(fdf->mlx_ptr, fdf->img_data->img);
+	exit(0);
+}
 
 static int	my_key_function(int keycode, t_fdf *fdf)
 {
@@ -67,8 +83,10 @@ int	main(int ac, char *av[])
 	mlx_clear_window(fdf.mlx_ptr, fdf.win_ptr);
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, data.img, WIN_X, WIN_Y);
 	mlx_key_hook(fdf.win_ptr, &my_key_function, &fdf);
+	mlx_hook(fdf.win_ptr, 17, 0, close_window, &fdf);
 	mlx_loop(fdf.mlx_ptr);
 }
+//	mlx_hook(fdf.win_ptr, 17, 1L << 0, close_window, &fdf);
 //	ft_printf("Bits per pixel: %d\n", data.bits_per_pixel);
 //	ft_printf("Size of each line: %d bytes\n", data.size_line);
 //	ft_printf("Endianness: %d\n", data.endian);

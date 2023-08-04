@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/11 20:51:49 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/31 20:44:46 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/04 21:53:33 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ $(LIB): $(OBJS)
 
 # Clean target
 clean:
-	rm -fr $(OBJ_DIR) $(DEP_DIR)
+	rm -rf $(OBJ_DIR) $(DEP_DIR)
 
 # Clean and remove library target
 fclean: clean

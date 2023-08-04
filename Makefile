@@ -6,7 +6,7 @@
 #    By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/13 13:59:50 by kamitsui          #+#    #+#              #
-#    Updated: 2023/07/31 13:51:04 by kamitsui         ###   ########.fr        #
+#    Updated: 2023/08/04 21:57:58 by kamitsui         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ DEPS = $(addprefix $(DEP_DIR)/, $(SRCS:.c=.d))
 # Compile
 CC = clang
 CF = -Wall -Wextra -Werror
-#CF = -Wall -Wextra -Werror -fsanitize=address -g#error ld: symbol not found
+#CF = -Wall -Wextra -Werror -fsanitize=address -g
 # x84_64
 #INC_CF = -I$(INC_DIR)
 # arm64
@@ -78,23 +78,14 @@ $(DEP_DIR)/%.d: %.c
 all: $(NAME)
 
 # Target
-# on 42School iMac (x86_64)
-#$(NAME): $(LIB_PRINTF) $(MLX_DYLB) $(DEPS) $(OBJS)
-#	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
-# on Macbook Air (arm64)
 $(NAME): $(LIB_PRINTF) $(LIB_MLX) $(DEPS) $(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) $(LIB_MLX) $(FRAMEWORK_CF)
-#	$(CC) -o $(NAME) $(OBJS) $(LIB_PRINTF) -L $(MLX_PATH) $(MLX_CF)
+	$(CC) $(CF) -o $(NAME) $(OBJS) $(LIB_PRINTF) $(LIB_MLX) $(FRAMEWORK_CF)
 
 # Library target
 $(LIB_PRINTF): $(LIBFT)
 	$(MAKE) -C $(LIB_PRINTF_DIR)
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
-
-
-#$(MLX_DYLB):
-#	@printf "Please install libmlx.dylb"
 
 # Clean target
 clean:
