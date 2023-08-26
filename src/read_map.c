@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 09:40:33 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/07/31 21:49:59 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/26 13:18:41 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static	void	get_rows_cols(char *file, int *rows, int *cols)
 
 	width = 0;
 	depth = 0;
-	if (access(file, F_OK | R_OK) == -1)
-		ft_errno_exit(file);
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		ft_errno_exit(file);
 	line = get_next_line(fd);
 	if (line == NULL)
 		return ;
