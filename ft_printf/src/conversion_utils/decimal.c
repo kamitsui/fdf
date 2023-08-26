@@ -6,7 +6,7 @@
 /*   By: kamitsui <kamitsui@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 20:15:55 by kamitsui          #+#    #+#             */
-/*   Updated: 2023/03/30 12:11:05 by kamitsui         ###   ########.fr       */
+/*   Updated: 2023/08/26 14:25:54 by kamitsui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "formalize.h"
 #include "libft.h"
 
-static	size_t	get_digit(long long num)
+static	size_t	count_digits(long long num)
 {
 	size_t	len;
 
@@ -48,7 +48,7 @@ static void	num_to_str(long long num, char *str, t_sm *machine)
 	size_t		len;
 
 	tmp_num = num;
-	len = get_digit(num);
+	len = count_digits(num);
 	if (num < 0)
 	{
 		str[0] = '-';
